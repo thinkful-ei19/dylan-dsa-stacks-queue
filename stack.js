@@ -140,7 +140,20 @@ function matchingQuotes(str) {
 
 }
 
+function sortThisStack(stack) {
+  let tempStack = new Stack();
+  while (stack.top) {
+    let value = stack.pop();
+    while (tempStack.top && peek(tempStack) > value) {
+      stack.push(tempStack.pop());
+    }
+    tempStack.push(value);
+  }
+  return display(tempStack);
+}
+
 const myStack = new Stack();
+const sortingStack = new Stack();
 
 function main() {
 
@@ -160,7 +173,17 @@ function main() {
   // console.log(matchingThreeParens('([){}]')); // --> false
   // console.log(matchingThreeParens('({[]})')); // --> true
 
-  console.log(matchingQuotes('[]{{}}"hi {[[[ ]][][dylan"{}'));
+  // console.log(matchingQuotes('[]{{}}"hi {[[[ ]][][dylan"{}'));
+
+
+  sortingStack.push(4);
+  sortingStack.push(3);
+  sortingStack.push(7);
+  sortingStack.push(1);
+  sortingStack.push(10);
+  sortingStack.push(2);
+
+  sortThisStack(sortingStack);
 
 
 }
