@@ -38,7 +38,7 @@ function display(stack) {
 
   let current = stack.top;
 
-  while (current.next) {
+  while (current) {
     console.log(current.data);
     current = current.next;
   }
@@ -53,7 +53,7 @@ function main() {
   myStack.push('McCoy');
   myStack.push('Scotty');
   console.log(JSON.stringify(myStack, null, 2));
-  // myStack.pop();
+  myStack.pop();
   // console.log(JSON.stringify(myStack, null, 2));
 
   display(myStack);
