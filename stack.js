@@ -29,18 +29,50 @@ class Stack {
 }
 
 function peek(stack) {
-  if (!stack.top) return 'The stack is empty';
+  if (!stack.top) return null;
   return stack.top.data;
 }
 
 function display(stack) {
-  if (!stack.top) return 'The stack is empty';
+  if (!stack.top) return null;
 
   let current = stack.top;
 
   while (current) {
     console.log(current.data);
     current = current.next;
+  }
+}
+
+function isPalindrome(stack) {
+  let tempStack = new Stack();
+  stack = stack.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+  for (let i = 0; i < stack.length; i++) {
+    tempStack.push(stack[i]);
+  }
+
+  for (let i = 0; i < stack.length; i++) {
+    let currentLetter = tempStack.pop();
+    if (currentLetter !== stack[i]) {
+      return false;
+    }
+  }
+
+  return true;
+
+}
+
+function matching(str) {
+  let tempStack = new Stack();
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === '(') tempStack.push(str[i]);
+    if (str[i] === ')' && !tempStack.top) return false;
+    if (str[i] === ')' && tempStack.top) tempStack.pop();
+  }
+  if (tempStack.top) {
+    return false;
+  } else {
+    return true;
   }
 }
 
@@ -52,10 +84,15 @@ function main() {
   myStack.push('Spock');
   myStack.push('McCoy');
   myStack.push('Scotty');
-  console.log(JSON.stringify(myStack, null, 2));
+  // console.log(JSON.stringify(myStack, null, 2));
   myStack.pop();
   myStack.pop();
-  display(myStack);
+  // display(myStack);
+
+  // console.log(isPalindrome('A man, a plan, a canal: Panama'));
+  // console.log(isPalindrome('dadd'));
+
+  console.log(matching('(( 5 + ( 4 - 2 ) ) )'));
 
 
 }
