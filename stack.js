@@ -104,8 +104,39 @@ function matchingThreeParens(str) {
   } else {
     return true;
   }
+}
 
-  // return JSON.stringify(tempStack, null, 2);
+function matchingQuotes(str) {
+
+  const tempStack = new Stack();
+
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (!tempStack.top) {
+      tempStack.push(char);
+    } else if ((char === '(' || char === '[' || char === '{' || char === ')' || char === ']' || char === '}') && tempStack.top.data !== '"') {
+      if (char === '(' || char === '[' || char === '{') {
+        tempStack.push(char);
+      } else if (char === ')' && tempStack.top.data === '(') {
+        tempStack.pop();
+      } else if (char === ']' && tempStack.top.data === '[') {
+        tempStack.pop();
+      } else if (char === '}' && tempStack.top.data === '{') {
+        tempStack.pop();
+      }
+    } else if (char === '"') {
+      if (tempStack.top) {
+        tempStack.pop();
+      } else {
+        tempStack.push(char);
+      }
+    }
+  }
+  if (tempStack.top) {
+    return false;
+  } else {
+    return true;
+  }
 
 }
 
@@ -126,8 +157,10 @@ function main() {
   // console.log(isPalindrome('dadd'));
 
   // console.log(matching('(( 5 + ( 4 - 2 ) ) )'));
-  console.log(matchingThreeParens('([){}]')); // --> false
+  // console.log(matchingThreeParens('([){}]')); // --> false
   // console.log(matchingThreeParens('({[]})')); // --> true
+
+  console.log(matchingQuotes('[]{{}}"hi {[[[ ]][][dylan"{}'));
 
 
 }
