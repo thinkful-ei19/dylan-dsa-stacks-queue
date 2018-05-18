@@ -76,6 +76,39 @@ function matching(str) {
   }
 }
 
+function matchingThreeParens(str) {
+  const tempStack = new Stack();
+
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (char === '(' || char === '[' || char === '{') {
+      tempStack.push(char);
+    }
+
+    if (char === ')' && tempStack.top.data === '(') {
+      tempStack.pop();
+    }
+
+    if (char === ']' && tempStack.top.data === '[') {
+      tempStack.pop();
+    }
+
+    if (char === '}' && tempStack.top.data === '{') {
+      tempStack.pop();
+    }
+
+  }
+
+  if (tempStack.top) {
+    return false;
+  } else {
+    return true;
+  }
+
+  // return JSON.stringify(tempStack, null, 2);
+
+}
+
 const myStack = new Stack();
 
 function main() {
@@ -92,7 +125,9 @@ function main() {
   // console.log(isPalindrome('A man, a plan, a canal: Panama'));
   // console.log(isPalindrome('dadd'));
 
-  console.log(matching('(( 5 + ( 4 - 2 ) ) )'));
+  // console.log(matching('(( 5 + ( 4 - 2 ) ) )'));
+  console.log(matchingThreeParens('([){}]')); // --> false
+  // console.log(matchingThreeParens('({[]})')); // --> true
 
 
 }
