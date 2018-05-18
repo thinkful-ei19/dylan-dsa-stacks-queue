@@ -54,8 +54,7 @@ function main() {
   myStack.push('Scotty');
   console.log(JSON.stringify(myStack, null, 2));
   myStack.pop();
-  // console.log(JSON.stringify(myStack, null, 2));
-
+  myStack.pop();
   display(myStack);
 
 
