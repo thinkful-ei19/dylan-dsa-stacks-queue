@@ -13,6 +13,7 @@ class Stack {
   push(data) {
     if (this.top === null) {
       this.top = new _Node(data, null);
+      return this.top;
     }
 
     const node = new _Node(data, this.top);
